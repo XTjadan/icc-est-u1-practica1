@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import models.Estudiante;
 
@@ -29,14 +30,60 @@ public class App {
 
 List<Estudiante>  c1 = new ArrayList<>(estudiantes);
 c1.sort(null);
-System.out.println("---C1: Codigo Ascendente-----");
+System.out.println("-----C1: Codigo Ascendente-----");
     for(Estudiante e : c1){
         System.out.println(e);
-
-
     }
 
+List<Estudiante> c2 = new ArrayList<>(estudiantes);
+c2.sort((e1, e2) -> {
+    int compNombre = e1.getNombre().compareTo(e2.getNombre());
+    if(compNombre != 0) 
+        return compNombre;
+        return e1.getCodigo().compareTo(e2.getCodigo());
+    
+    });
+    System.out.println("-----C2: Nombre Ascendente; codigo ascendente-----");
+    for(Estudiante e : c2){
+        System.out.println(e);
+    }
 
-}
+    List<Estudiante> c3 = new ArrayList<>(estudiantes);
+    c3.sort(Comparator.comparingDouble(Estudiante::getNota));
+    System.out.println("-----C3: Nota ascendente, sin desampate");
+    for(Estudiante e : c3){
+        System.out.println(e);
+    }
+
+    List<Estudiante> c4 = new ArrayList<>(estudiantes);
+    c3.sort(Comparator.comparingDouble(Estudiante::getNota).reversed()
+    .thenComparing(Estudiante::getNombre));
+    System.out.println("----- C4: Nota decendente, nombre ascendente -----");
+    for(Estudiante e: c4){
+        System.out.println(e);
+    }
+
+    List<Estudiante> c5 = new ArrayList<>(estudiantes);
+
+
+
+
+
+
+
+
+
+
+
+
+  }
+
+
+    
+
+
+
+
+  
 }
 
